@@ -17,8 +17,13 @@ ActiveRecord::Schema.define(version: 2019_03_24_204947) do
 
   create_table "players", force: :cascade do |t|
     t.string "name"
-    t.integer "life_point"
-    t.integer "attack_points"
+    t.integer "life_points", default: 3, null: false
+    t.integer "attack_points", default: 1, null: false
+    t.integer "dexterity_points", default: 1, null: false
+    t.integer "intelligence_points", default: 1, null: false
+    t.integer "magic_points", default: 1, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

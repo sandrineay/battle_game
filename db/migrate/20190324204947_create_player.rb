@@ -6,6 +6,7 @@ class CreatePlayer < ActiveRecord::Migration[5.2]
       t.integer :attack_points, null: false, default: 1
       t.integer :dexterity_points, null: false, default: 1
       t.integer :intelligence_points, null: false, default: 1
+      t.integer :magic_points, null: false, default: 1
 
       t.timestamps
     end
