@@ -1,0 +1,6 @@
+<% if @players.empty? %>
+  <%= link_to "Create at least two players!", new_player_path %>
+<% else %>
+  Choose two players!
+  or create <%= link_to "a new player", new_player_path %>
+<% end %>
