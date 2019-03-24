@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2019_03_24_204947) do
     t.string "name"
     t.integer "life_points", default: 3, null: false
     t.integer "attack_points", default: 1, null: false
-    t.integer "dexterity_points", default: 1, null: false
+    t.integer "strength_points", default: 1, null: false
     t.integer "intelligence_points", default: 1, null: false
     t.integer "magic_points", default: 1, null: false
     t.datetime "created_at", null: false
