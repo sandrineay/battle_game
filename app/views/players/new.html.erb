@@ -2,5 +2,7 @@
 
 <%= simple_form_for(@player) do |f| %>
   <%= f.input :name %>
+  <%= f.input :picture %>
+  <%= f.input :picture_cache, as: :hidden %>
   <%= f.button :submit %>
 <% end %>
