@@ -1,6 +1,16 @@
 <% if @players.empty? %>
   <%= link_to "Create at least two players!", new_player_path %>
+<% elsif @players_count == 1 %>
+  You have <%= @players_count %> player!
+  <p><%= @players.first.name %></p>
+  Create at least <%= link_to "another player", new_player_path %>
 <% else %>
+  You have <%= @players_count %> players!
+  <ul>
+    <% @players.each do |player| %>
+    <li><%= player.name %></li>
+    <% end %>
+  </ul>
   Choose two players!
   or create <%= link_to "a new player", new_player_path %>
 <% end %>
