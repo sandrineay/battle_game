@@ -1,7 +1,12 @@
 <h1>Create your player</h1>
 
+<p>You have only 10 points to evenly distribute between Strength, Magic and Intelligence.</p>
+
 <%= simple_form_for(@player) do |f| %>
   <%= f.input :name %>
+  <%= f.input :strength_points %>
+  <%= f.input :intelligence_points %>
+  <%= f.input :magic_points %>
   <%= f.input :picture %>
   <%= f.input :picture_cache, as: :hidden %>
   <%= f.button :submit %>
