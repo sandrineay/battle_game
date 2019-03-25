@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_25_020803) do
+ActiveRecord::Schema.define(version: 2019_03_25_192019) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,8 +22,8 @@ ActiveRecord::Schema.define(version: 2019_03_25_020803) do
 
   create_table "players", force: :cascade do |t|
     t.string "name"
-    t.integer "life_points", default: 3, null: false
-    t.integer "attack_points", default: 1, null: false
+    t.float "life_points", default: 3.0, null: false
+    t.float "attack_points", default: 1.0, null: false
     t.integer "strength_points", default: 1, null: false
     t.integer "intelligence_points", default: 1, null: false
     t.integer "magic_points", default: 1, null: false

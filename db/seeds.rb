@@ -1,3 +1,8 @@
+puts 'Delete existing data'
+
+Battle.destroy_all
+Player.destroy_all
+
 puts 'Create first 3 players'
 
 player = Player.new(name: 'Gandalf', strength_points: 2, intelligence_points: 4, magic_points: 4)

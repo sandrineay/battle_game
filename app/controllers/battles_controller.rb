@@ -17,9 +17,40 @@ class BattlesController < ApplicationController
   end
 
   def show
+    @player_1 = Player.find(@battle.player_1_id)
+    @player_2 = Player.find(@battle.player_2_id)
+    @score_1 = score(@player_1)
+    @score_2 = score(@player_2)
+    if @score_1 == @score_2
+      @winner = nil
+    else
+      if @score_1 > @score_2
+        @winner = @player_1
+        @player_2.life_points -= 0.5
+        @player_2.save
+        @player_1.life_points += 0.5
+        @player_1.attack_points += 0.8
+        @player_1.save
+      else
+        @winner = @player_2
+        @player_1.life_points -= 0.5
+        @player_1.save
+        @player_2.life_points += 0.5
+        @player_2.attack_points += 0.8
+        @player_2.save
+      end
+    end
   end
 
-  private
+ private
+
+  def score(player)
+    attack = player.attack_points
+    strength = player.strength_points
+    intelligence = player.intelligence_points
+    magic = player.magic_points
+    attack + strength * 0.8 + intelligence * 0.7 + magic * 0.9
+  end
 
   def set_battle
     @battle = Battle.find(params[:id])
