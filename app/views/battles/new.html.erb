@@ -13,4 +13,10 @@
   </ul>
   Choose two players!
   or create <%= link_to "a new player", new_player_path %>
+
+  <%= simple_form_for(@battle) do |f| %>
+    <%= f.input :player_1_id %>
+    <%= f.input :player_2_id %>
+    <%= f.button :submit %>
+  <% end %>
 <% end %>
