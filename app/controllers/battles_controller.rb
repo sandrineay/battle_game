@@ -1,4 +1,6 @@
 class BattlesController < ApplicationController
+  before_action :set_battle, only: :show
+
   def new
     @players = Player.all
     @players_count = Player.count
@@ -18,6 +20,10 @@ class BattlesController < ApplicationController
   end
 
   private
+
+  def set_battle
+    @battle = Battle.find(params[:id])
+  end
 
   def battle_params
     params.require(:battle).permit(:player_1_id, :player_2_id)
