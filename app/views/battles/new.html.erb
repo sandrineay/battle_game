@@ -8,15 +8,15 @@
   You have <%= @players_count %> players!
   <ul>
     <% @players.each do |player| %>
-    <li class="player-item"><%= player.name %> <%= cl_image_tag player.picture, height: 100 %></li>
+    <li class="player-item" data-player-id=<%= "#{player.id}" %>><%= player.name %> <%= cl_image_tag player.picture, height: 100 %></li>
     <% end %>
   </ul>
   Choose two players!
   or create <%= link_to "a new player", new_player_path %>
 
   <%= simple_form_for(@battle) do |f| %>
-    <%= f.input :player_1_id %>
-    <%= f.input :player_2_id %>
+    <%= f.input :player_1_id, as: :hidden %>
+    <%= f.input :player_2_id, as: :hidden %>
     <%= f.button :submit %>
   <% end %>
 <% end %>
