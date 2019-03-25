@@ -1,6 +1,10 @@
 class BattlesController < ApplicationController
   before_action :set_battle, only: :show
 
+  def index
+    @battles = Battle.all
+  end
+
   def new
     @players = Player.all
     @players_count = Player.count
