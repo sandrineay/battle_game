@@ -1,5 +1,6 @@
 class BattlesController < ApplicationController
   before_action :set_battle, only: :show
+  before_action :set_players, only: :create
 
   def index
     @battles = Battle.all
@@ -58,6 +59,10 @@ class BattlesController < ApplicationController
 
   def set_battle
     @battle = Battle.find(params[:id])
+  end
+
+  def set_players
+    @players = Player.all
   end
 
   def battle_params
