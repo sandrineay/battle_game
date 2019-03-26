@@ -1,6 +1,8 @@
 <div class="battle-navbar">
   <div class="navbar-left-content">
-    <%= image_tag 'ring.png', class: 'logo' %>
+    <%= link_to root_path do %>
+      <%= image_tag 'ring.png', class: 'logo' %>
+    <% end %>
   </div>
   <div class="navbar-right-content">
     <p><%= link_to 'Manage players', players_path %></p>

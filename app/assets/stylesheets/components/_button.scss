@@ -10,3 +10,16 @@ a.button-start {
     opacity: 0.8;
   }
 }
+
+.btn-submit {
+  background-color: $yellow;
+  border-radius: 4px;
+  padding: 8px 20px;
+  font-size: 24px;
+  color: $gray;
+  font-family: 'Eczar', serif;
+  text-decoration: none;
+  &:hover {
+    opacity: 0.8;
+  }
+}

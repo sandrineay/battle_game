@@ -1,22 +1,26 @@
-<% if @players.empty? %>
-  <%= link_to "Create at least two players!", new_player_path %>
-<% elsif @players_count == 1 %>
-  You have <%= @players_count %> player!
-  <p><%= @players.first.name %></p>
-  Create at least <%= link_to "another player", new_player_path %>
-<% else %>
-  You have <%= @players_count %> players!
-  <ul>
-    <% @players.each do |player| %>
-    <li class="player-item" data-player-id=<%= "#{player.id}" %>><%= player.name %> <%= cl_image_tag player.picture, height: 100 %></li>
+<div class="container step-content">
+  <% if @players.empty? %>
+    <%= link_to "Create at least two players!", new_player_path %>
+  <% elsif @players_count == 1 %>
+    You have only <%= @players_count %> player!
+    <p><%= @players.first.name %></p>
+    Create at least <%= link_to "another player", new_player_path %>
+  <% else %>
+    <h1>Choose two players 🤝</h1>
+    <p class="subtitle">Click on the avatar of two players - or <%= link_to "create a new player", new_player_path %>.</p>
+    <div class="player-list">
+      <% @players.each do |player| %>
+        <div class="player-item text-center" data-player-id=<%= "#{player.id}" %>>
+          <%= cl_image_tag player.picture, height: 100 %>
+          <p><%= player.name %></p>
+          <p class="text-transparent"><%= player.life_points %> <i class="fas fa-heart"></i></p>
+        </div>
+      <% end %>
+    </div>
+    <%= simple_form_for(@battle) do |f| %>
+      <%= f.input :player_1_id, as: :hidden %>
+      <%= f.input :player_2_id, as: :hidden %>
+      <%= f.button :submit, 'Launch the battle!', class: "btn-submit" %>
     <% end %>
-  </ul>
-  Choose two players!
-  or create <%= link_to "a new player", new_player_path %>
-
-  <%= simple_form_for(@battle) do |f| %>
-    <%= f.input :player_1_id, as: :hidden %>
-    <%= f.input :player_2_id, as: :hidden %>
-    <%= f.button :submit %>
   <% end %>
-<% end %>
+</div>
