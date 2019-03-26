@@ -1,13 +1,12 @@
 class BattlesController < ApplicationController
   before_action :set_battle, only: :show
-  before_action :set_players, only: :create
+  before_action :set_players, only: [:new, :create]
 
   def index
     @battles = Battle.all
   end
 
   def new
-    @players = Player.all
     @players_count = Player.count
     @battle = Battle.new
   end
@@ -62,7 +61,7 @@ class BattlesController < ApplicationController
   end
 
   def set_players
-    @players = Player.all
+    @players = Player.where('life_points > ?', 0.0)
   end
 
   def battle_params
