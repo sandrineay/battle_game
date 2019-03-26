@@ -16,7 +16,11 @@ class BattlesController < ApplicationController #:nodoc:
   def create
     @battle = Battle.new(battle_params)
     if @battle.save
-      redirect_to battle_path(@battle)
+      # score1 = score(@battle.player_1)
+      # score2 = score(@battle.player_2)
+      # @battle.winner = winner_loser(score1, score2)[:winner].id
+      # @battle.loser = winner_loser(score1, score2)[:loser].id
+      # redirect_to battle_path(@battle)
     else
       render :new
     end
@@ -34,6 +38,14 @@ class BattlesController < ApplicationController #:nodoc:
     intelligence = player.intelligence_points
     magic = player.magic_points
     attack + strength * 0.8 + intelligence * 0.7 + magic * 0.9
+  end
+
+  def winner_loser(score1, score2)
+    if score1 > score2
+      { winner: @battle.player_1, loser: @battle.player_2 }
+    else
+      { winner: @battle.player_2, loser: @battle.player_1 }
+    end
   end
 
   def set_battle
