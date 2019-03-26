@@ -1,5 +1,6 @@
 class PlayersController < ApplicationController
   def index
+    @players = Player.all
     @players_count = Player.count
   end
 
@@ -10,7 +11,7 @@ class PlayersController < ApplicationController
   def create
     @player = Player.new(player_params)
     if @player.save
-      redirect_to players_path
+      redirect_to new_battle_path
     else
       render :new
     end

@@ -1,13 +1,18 @@
-<h1>Create your player</h1>
+<div class="container">
+  <h1>Create your player</h1>
 
-<p>You have only 10 points to evenly distribute between Strength, Magic and Intelligence.</p>
+  <p class="text-transparent">You have only 10 points to distribute between Strength 💪, Magic 💫 and Intelligence 💡</p>
+  <p class="text-transparent">Your player will have by default 3 life points <i class="fas fa-heart"></i> and 1 attack point <i class="fas fa-fist-raised"></i>.</p>
 
-<%= simple_form_for(@player) do |f| %>
-  <%= f.input :name %>
-  <%= f.input :strength_points %>
-  <%= f.input :intelligence_points %>
-  <%= f.input :magic_points %>
-  <%= f.input :picture %>
-  <%= f.input :picture_cache, as: :hidden %>
-  <%= f.button :submit %>
-<% end %>
+  <div class="form-width">
+    <%= simple_form_for(@player) do |f| %>
+      <%= f.input :name, input_html: { class: 'form-input' } %>
+      <%= f.input :strength_points, label: 'Strength 💪', input_html: { class: 'form-input' } %>
+      <%= f.input :intelligence_points, label: 'Intelligence 💡', input_html: { class: 'form-input' } %>
+      <%= f.input :magic_points, label: 'Magic 💫', input_html: { class: 'form-input' } %>
+      <%= f.input :picture %>
+      <%= f.input :picture_cache, as: :hidden %>
+      <%= f.button :submit, class: 'btn-submit' %>
+    <% end %>
+  </div>
+</div>
