@@ -4,7 +4,6 @@ class Player < ApplicationRecord
 
   mount_uploader :picture, PhotoUploader
   validates :name, uniqueness: true, presence: true
-  validates :picture, presence: true
   validates :strength_points, presence: true
   validates :intelligence_points, presence: true
   validates :magic_points, presence: true
