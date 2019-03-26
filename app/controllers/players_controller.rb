@@ -1,4 +1,8 @@
-class PlayersController < ApplicationController
+# frozen_string_literal: true
+
+class PlayersController < ApplicationController #:nodoc:
+  before_action :set_player, only: %i[edit update]
+
   def index
     @players = Player.all
     @players_count = Player.count
@@ -18,17 +22,34 @@ class PlayersController < ApplicationController
   end
 
   def edit
+    # edit method
   end
 
   def update
+    if @player.update(player_params)
+      redirect_to battles_path
+    else
+      render :edit
+    end
   end
 
   def destroy
+    # destroy method
   end
 
   private
 
+  def set_player
+    @player = Player.find(params[:id])
+  end
+
   def player_params
-    params.require(:player).permit(:name, :picture, :strength_points, :intelligence_points, :magic_points)
+    params.require(:player).permit(
+      :name,
+      :picture,
+      :strength_points,
+      :intelligence_points,
+      :magic_points
+    )
   end
 end
