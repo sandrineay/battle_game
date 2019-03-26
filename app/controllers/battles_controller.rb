@@ -38,15 +38,6 @@ class BattlesController < ApplicationController #:nodoc:
 
   private
 
-  def score(player)
-    attack = player.attack_points
-    strength = player.strength_points
-    intelligence = player.intelligence_points
-    magic = player.magic_points
-    skills = [strength, intelligence, magic].shuffle!
-    attack + skills[0] * 0.8 + skills[1] * 0.7 + skills[2] * 0.9
-  end
-
   def winner_loser_scores(score1, score2)
     if score1 > score2
       { winner_score: score1, loser_score: score2 }
@@ -64,16 +55,16 @@ class BattlesController < ApplicationController #:nodoc:
   end
 
   def battle_winner_loser(battle)
-    score1 = score(battle.player_1)
-    score2 = score(battle.player_2)
+    score1 = battle.player_1.score
+    score2 = battle.player_2.score
     battle.winner = winner_loser(score1, score2)[:winner].id
     battle.loser = winner_loser(score1, score2)[:loser].id
     battle.save
   end
 
   def battle_scores(battle)
-    score1 = score(battle.player_1)
-    score2 = score(battle.player_2)
+    score1 = battle.player_1.score
+    score2 = battle.player_2.score
     battle.winner_score = winner_loser_scores(score1, score2)[:winner_score]
     battle.loser_score = winner_loser_scores(score1, score2)[:loser_score]
     battle.save

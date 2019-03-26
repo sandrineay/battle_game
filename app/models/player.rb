@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Player < ApplicationRecord
   has_many :primary_battles, class_name: 'Battle', foreign_key: 'player_1_id'
   has_many :secondary_battles, class_name: 'Battle', foreign_key: 'player_2_id'
@@ -13,8 +15,12 @@ class Player < ApplicationRecord
   validate :max_10_points
 
   def max_10_points
-    if strength_points + intelligence_points + magic_points > 10
-      errors.add(:strength_points, 'The total of all the points - strength, intelligence and magic - should not exceed 10.')
-    end
+    total_skills = strength_points + intelligence_points + magic_points
+    errors.add(:strength_points, 'Skill points > 10') if total_skills > 10
+  end
+
+  def score
+    skills = [strength_points, intelligence_points, magic_points].shuffle!
+    attack_points + skills[0] * 0.8 + skills[1] * 0.7 + skills[2] * 0.9
   end
 end

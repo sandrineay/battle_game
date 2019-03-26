@@ -20,8 +20,8 @@ ActiveRecord::Schema.define(version: 2019_03_26_211254) do
     t.integer "player_2_id"
     t.integer "winner"
     t.integer "loser"
-    t.integer "winner_score"
-    t.integer "loser_score"
+    t.float "winner_score"
+    t.float "loser_score"
     t.boolean "draw", default: false
   end
 
