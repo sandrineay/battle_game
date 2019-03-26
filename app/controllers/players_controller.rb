@@ -27,7 +27,7 @@ class PlayersController < ApplicationController #:nodoc:
 
   def update
     if @player.update(player_params)
-      redirect_to battles_path
+      redirect_to players_path
     else
       render :edit
     end
