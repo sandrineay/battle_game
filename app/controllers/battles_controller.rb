@@ -16,18 +16,19 @@ class BattlesController < ApplicationController #:nodoc:
   def create
     @battle = Battle.new(battle_params)
     if @battle.save
-      # score1 = score(@battle.player_1)
-      # score2 = score(@battle.player_2)
-      # @battle.winner = winner_loser(score1, score2)[:winner].id
-      # @battle.loser = winner_loser(score1, score2)[:loser].id
-      # redirect_to battle_path(@battle)
+      battle_winner_loser(@battle)
+      battle_scores(@battle)
+      redirect_to battle_path(@battle)
     else
       render :new
     end
   end
 
   def show
-    # show method
+    @winner = Player.find(@battle.winner)
+    @loser = Player.find(@battle.loser)
+    @winner_score = @battle.winner_score
+    @loser_score = @battle.loser_score
   end
 
   private
@@ -40,12 +41,36 @@ class BattlesController < ApplicationController #:nodoc:
     attack + strength * 0.8 + intelligence * 0.7 + magic * 0.9
   end
 
+  def winner_loser_scores(score1, score2)
+    if score1 > score2
+      { winner_score: score1, loser_score: score2 }
+    else
+      { winner_score: score2, loser_score: score1 }
+    end
+  end
+
   def winner_loser(score1, score2)
     if score1 > score2
       { winner: @battle.player_1, loser: @battle.player_2 }
     else
       { winner: @battle.player_2, loser: @battle.player_1 }
     end
+  end
+
+  def battle_winner_loser(battle)
+    score1 = score(battle.player_1)
+    score2 = score(battle.player_2)
+    battle.winner = winner_loser(score1, score2)[:winner].id
+    battle.loser = winner_loser(score1, score2)[:loser].id
+    battle.save
+  end
+
+  def battle_scores(battle)
+    score1 = score(battle.player_1)
+    score2 = score(battle.player_2)
+    battle.winner_score = winner_loser_scores(score1, score2)[:winner_score]
+    battle.loser_score = winner_loser_scores(score1, score2)[:loser_score]
+    battle.save
   end
 
   def set_battle

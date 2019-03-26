@@ -5,7 +5,7 @@ puts 'Delete existing data'
 Battle.destroy_all
 Player.destroy_all
 
-puts 'Create first 3 players'
+puts 'Create first 4 players'
 
 player = Player.new(
   name: 'Gandalf',

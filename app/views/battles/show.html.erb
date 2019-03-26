@@ -15,23 +15,23 @@
   <table class="margin-dotted-table">
     <tr>
       <td></td>
-      <td><%= @player_1.name %></td>
-      <td><%= @player_2.name %></td>
+      <td><%= @winner.name %></td>
+      <td><%= @loser.name %></td>
     </tr>
     <tr>
       <td>Score</td>
-      <td><%= @score_1.round(1) %></td>
-      <td><%= @score_2.round(1) %></td>
+      <td><%= @winner_score.round(1) %></td>
+      <td><%= @loser_score.round(1) %></td>
     </tr>
     <tr>
       <td>Life points</td>
-      <td><%= @player_1.life_points.round(1) %> <i class="fas fa-heart"></i></td>
-      <td><%= @player_2.life_points.round(1) %> <i class="fas fa-heart"></i></td>
+      <td><%= @winner.life_points.round(1) %> <i class="fas fa-heart"></i></td>
+      <td><%= @loser.life_points.round(1) %> <i class="fas fa-heart"></i></td>
     </tr>
     <tr>
       <td>Attack points</td>
-      <td><%= @player_1.attack_points.round(1) %> <i class="fas fa-fist-raised"></i></td>
-      <td><%= @player_2.attack_points.round(1) %> <i class="fas fa-fist-raised"></i></td>
+      <td><%= @winner.attack_points.round(1) %> <i class="fas fa-fist-raised"></i></td>
+      <td><%= @loser.attack_points.round(1) %> <i class="fas fa-fist-raised"></i></td>
     </tr>
   </table>
 
