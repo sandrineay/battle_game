@@ -15,4 +15,10 @@ class PlayersControllerTest < ActionDispatch::IntegrationTest
     @player.reload
     assert_equal 'updated', @player.name
   end
+
+  test 'should destroy player' do
+    assert_difference('Player.count', -1) do
+      delete player_url(@player), xhr: true
+    end
+  end
 end

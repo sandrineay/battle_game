@@ -18,7 +18,7 @@
         <td></td>
       </tr>
       <% @players.each do |player| %>
-        <tr>
+        <tr data-player-id="<%= player.id %>">
           <td>
             <% if player.picture_url %>
               <%= cl_image_tag player.picture, height: 100 %>
@@ -44,7 +44,7 @@
             <% end %>
           </td>
           <td>
-            <%= link_to '#', class: 'yellow-link' do %>
+            <%= link_to player_path(player), method: :delete, remote: true, class: 'yellow-link' do %>
               <i class="fas fa-trash"></i>
             <% end %>
           </td>
