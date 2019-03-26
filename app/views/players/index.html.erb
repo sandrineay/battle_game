@@ -1,23 +1,55 @@
-<% if @players.empty? %>
-  <%= link_to "Create at least two players!", new_player_path %>
-<% elsif @players_count == 1 %>
-  You have <%= @players_count %> player!
-  <p><%= @players.first.name %></p>
-  Create at least <%= link_to "another player", new_player_path %>
-<% else %>
-  You have <%= @players_count %> players!
-  <ul>
-    <% @players.each do |player| %>
-      <li class="player-item">
-        <%= player.name %>
-        <% if player.picture_url %>
-          <%= cl_image_tag player.picture, height: 100 %>
-        <% else %>
-          <%= image_tag 'avatar.png', class: 'avatar-large' %>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
-  Choose two players!
-  or create <%= link_to "a new player", new_player_path %>
-<% end %>
+<div class="container">
+  <div class="index-header">
+    <h1>Players</h1>
+    <%= link_to "Create a new player", new_player_path, class: 'btn-submit-small' %>
+  </div>
+  <% if @players.empty? %>
+    You have no players.
+    <%= link_to "Create a player!", new_player_path %>
+  <% else %>
+    <table class="players-table">
+      <tr>
+        <td></td>
+        <td></td>
+        <td><strong>Traits</strong></td>
+        <td><strong>Lives</strong></td>
+        <td><strong>Attack</strong></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <% @players.each do |player| %>
+        <tr>
+          <td>
+            <% if player.picture_url %>
+              <%= cl_image_tag player.picture, height: 100 %>
+            <% else %>
+              <%= image_tag 'avatar.png', class: 'avatar-large' %>
+            <% end %>
+          </td>
+          <td><strong><%= player.name %></strong></td>
+          <td>
+            <p>💡 <%= player.intelligence_points %></p>
+            <p>💫 <%= player.magic_points %></p>
+            <p>💪 <%= player.strength_points %></p>
+          </td>
+          <td>
+            <%= player.life_points %> <i class="fas fa-heart"></i>
+          </td>
+          <td>
+            <%= player.attack_points %> <i class="fas fa-fist-raised">
+          </td>
+          <td>
+            <%= link_to edit_player_path(player), class: 'yellow-link' do %>
+              <i class="fas fa-edit"></i>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to '#', class: 'yellow-link' do %>
+              <i class="fas fa-trash"></i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  <% end %>
+</div>
