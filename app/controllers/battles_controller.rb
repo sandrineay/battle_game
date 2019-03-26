@@ -70,6 +70,11 @@ class BattlesController < ApplicationController #:nodoc:
     battle.save
   end
 
+  def adjust_life_attack(battle)
+    winner = Player.find(battle.winner)
+    loser = Player.find(battle.loser)
+  end
+
   def set_battle
     @battle = Battle.find(params[:id])
   end
