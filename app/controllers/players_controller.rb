@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class PlayersController < ApplicationController #:nodoc:
-  before_action :set_player, only: %i[edit update]
+  before_action :set_player, only: %i[edit update destroy]
 
   def index
     @players = Player.all
@@ -34,7 +34,7 @@ class PlayersController < ApplicationController #:nodoc:
   end
 
   def destroy
-    # destroy method
+    @player.destroy
   end
 
   private
