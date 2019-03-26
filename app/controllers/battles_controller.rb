@@ -17,33 +17,36 @@ class BattlesController < ApplicationController #:nodoc:
     @battle = Battle.new(battle_params)
     if @battle.save
       if score(@battle.player_1) == score(@battle.player_2)
-        @battle.update(draw: true)
+        @battle.draw = true
+        @battle.save
       else
         battle_winner_loser(@battle)
         battle_scores(@battle)
-        redirect_to battle_path(@battle)
       end
+      redirect_to battle_path(@battle)
     else
       render :new
     end
   end
 
   def show
-    @winner = Player.find(@battle.winner)
-    @loser = Player.find(@battle.loser)
-    @winner_score = @battle.winner_score
-    @loser_score = @battle.loser_score
+    @winner = Player.find(@battle.winner) unless @battle.draw
+    @loser = Player.find(@battle.loser) unless @battle.draw
+    @winner_score = @battle.winner_score unless @battle.draw
+    @loser_score = @battle.loser_score unless @battle.draw
   end
 
   private
 
-  def score(player)
-    attack = player.attack_points
-    strength = player.strength_points
-    intelligence = player.intelligence_points
-    magic = player.magic_points
-    attack + strength * 0.8 + intelligence * 0.7 + magic * 0.9
-  end
+  # def score(player)
+  #   attack = player.attack_points
+  #   # strength = player.strength_points
+  #   # intelligence = player.intelligence_points
+  #   # magic = player.magic_points
+  #   # skills = [strength, intelligence, magic].shuffle!
+  #   # attack + skills[0] * 0.8 + skills[1] * 0.7 + skills[2] * 0.9
+  #   ret3.0
+  # end
 
   def winner_loser_scores(score1, score2)
     if score1 > score2
