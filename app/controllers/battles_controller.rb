@@ -16,12 +16,12 @@ class BattlesController < ApplicationController #:nodoc:
   def create # rubocop:disable Metrics/MethodLength
     @battle = Battle.new(battle_params)
     if @battle.save
-      if score(@battle.player_1) == score(@battle.player_2)
+      battle_scores(@battle)
+      if @battle.winner_score == @battle.loser_score
         @battle.draw = true
         @battle.save
       else
         battle_winner_loser(@battle)
-        battle_scores(@battle)
       end
       redirect_to battle_path(@battle)
     else
@@ -38,15 +38,14 @@ class BattlesController < ApplicationController #:nodoc:
 
   private
 
-  # def score(player)
-  #   attack = player.attack_points
-  #   # strength = player.strength_points
-  #   # intelligence = player.intelligence_points
-  #   # magic = player.magic_points
-  #   # skills = [strength, intelligence, magic].shuffle!
-  #   # attack + skills[0] * 0.8 + skills[1] * 0.7 + skills[2] * 0.9
-  #   ret3.0
-  # end
+  def score(player)
+    attack = player.attack_points
+    strength = player.strength_points
+    intelligence = player.intelligence_points
+    magic = player.magic_points
+    skills = [strength, intelligence, magic].shuffle!
+    attack + skills[0] * 0.8 + skills[1] * 0.7 + skills[2] * 0.9
+  end
 
   def winner_loser_scores(score1, score2)
     if score1 > score2
