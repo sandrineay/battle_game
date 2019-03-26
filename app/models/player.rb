@@ -21,6 +21,6 @@ class Player < ApplicationRecord
 
   def score
     skills = [strength_points, intelligence_points, magic_points].shuffle!
-    attack_points + skills[0] * 0.8 + skills[1] * 0.7 + skills[2] * 0.9
+    attack_points + skills[0] * 0.5 + skills[1] * 0.7 + skills[2] * 0.9
   end
 end
