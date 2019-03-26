@@ -7,7 +7,7 @@
     You have no players.
     <%= link_to "Create a player!", new_player_path %>
   <% else %>
-    <table class="players-table">
+    <table class="margin-dotted-table">
       <tr>
         <td></td>
         <td></td>
@@ -36,7 +36,7 @@
             <%= player.life_points %> <i class="fas fa-heart"></i>
           </td>
           <td>
-            <%= player.attack_points %> <i class="fas fa-fist-raised">
+            <%= player.attack_points %> <i class="fas fa-fist-raised"></i>
           </td>
           <td>
             <%= link_to edit_player_path(player), class: 'yellow-link' do %>

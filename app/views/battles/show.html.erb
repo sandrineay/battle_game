@@ -1,26 +1,41 @@
-<h1>Show page de battle n° <%= @battle.id %> !!!</h1>
- <p>With:</p>
+<div class="container">
+  <h1 class="m-b-40"><%= @winner.name %> prevailed! 🏆</h1>
 
-<p>Player 1: <%= @player_1.name %></p>
-<p>Player 2: <%= @player_2.name %></p>
+  <div class="result-content">
+    <% if @winner.picture_url %>
+      <%= cl_image_tag @winner.picture, height: 100 %>
+    <% else %>
+      <%= image_tag 'avatar.png', class: 'avatar-large' %>
+    <% end %>
+    <p class="text-transparent fixed-width-p">After a long and grueling battle, <%= @winner.name %> won the fight.</p>
+  </div>
 
-<% if @winner %>
-  <p>The winner is: <%= @winner.name %></p>
-  <p>Scores are:</p>
-  <p><%= @player_1.name %>: <%= @score_1 %> </p>
-  <p><%= @player_2.name %>: <%= @score_2 %> </p>
-<% else %>
-  <p>There's a draw!</p>
-<% end %>
+  <h2 class="m-t-40">Battle recap:</h2>
 
-<p>Recap post battle</p>
-<p><%= @player_1.name %></p>
-<p>Life points: <%= @player_1.life_points %></p>
-<p>Attack points: <%= @player_1.attack_points %></p>
+  <table class="margin-dotted-table">
+    <tr>
+      <td></td>
+      <td><%= @player_1.name %></td>
+      <td><%= @player_2.name %></td>
+    </tr>
+    <tr>
+      <td>Score</td>
+      <td><%= @score_1.round(1) %></td>
+      <td><%= @score_2.round(1) %></td>
+    </tr>
+    <tr>
+      <td>Life points</td>
+      <td><%= @player_1.life_points.round(1) %> <i class="fas fa-heart"></i></td>
+      <td><%= @player_2.life_points.round(1) %> <i class="fas fa-heart"></i></td>
+    </tr>
+    <tr>
+      <td>Attack points</td>
+      <td><%= @player_1.attack_points.round(1) %> <i class="fas fa-fist-raised"></i></td>
+      <td><%= @player_2.attack_points.round(1) %> <i class="fas fa-fist-raised"></i></td>
+    </tr>
+  </table>
 
-<hr>
+  <%= link_to "Launch new battle", new_battle_path, class: 'btn-submit-small' %>
+</div>
 
-<p><%= @player_2.name %></p>
-<p>Life points: <%= @player_2.life_points %></p>
-<p>Attack points: <%= @player_2.attack_points %></p>
 
