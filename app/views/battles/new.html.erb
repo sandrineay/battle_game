@@ -7,7 +7,7 @@
     Create at least <%= link_to "another player", new_player_path %>
   <% else %>
     <h1>Choose two players 🤝</h1>
-    <p class="subtitle">Click on the avatar of two players - or <%= link_to "create a new player", new_player_path %>.</p>
+    <p class="subtitle">Click on the avatar of two players - you can also <%= link_to "create a new player", new_player_path %>.</p>
     <div class="player-list">
       <% @players.each do |player| %>
         <div class="player-item text-center" data-player-id=<%= "#{player.id}" %>>
