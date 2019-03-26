@@ -1,0 +1,23 @@
+legolas:
+  name: "Legolas"
+  life_points: 3.0
+  attack_points: 1.0
+  intelligence_points: 5
+  magic_points: 2
+  strength_points: 3
+
+sauron:
+  name: "Sauron"
+  life_points: 0.0
+  attack_points: 0.0
+  intelligence_points: 3
+  magic_points: 3
+  strength_points: 4
+
+gimli:
+  name: "Gimli"
+  life_points: 5.0
+  attack_points: 2.5
+  intelligence_points: 4
+  magic_points: 1
+  strength_points: 5
