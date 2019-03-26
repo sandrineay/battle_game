@@ -8,7 +8,14 @@
   You have <%= @players_count %> players!
   <ul>
     <% @players.each do |player| %>
-    <li class="player-item"><%= player.name %> <%= cl_image_tag player.picture, height: 100 %></li>
+      <li class="player-item">
+        <%= player.name %>
+        <% if player.picture_url %>
+          <%= cl_image_tag player.picture, height: 100 %>
+        <% else %>
+          <%= image_tag 'avatar.png', class: 'avatar-large' %>
+        <% end %>
+      </li>
     <% end %>
   </ul>
   Choose two players!

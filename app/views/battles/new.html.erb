@@ -11,7 +11,11 @@
     <div class="player-list">
       <% @players.each do |player| %>
         <div class="player-item text-center" data-player-id=<%= "#{player.id}" %>>
-          <%= cl_image_tag player.picture, height: 100 %>
+          <% if player.picture_url %>
+            <%= cl_image_tag player.picture, height: 100 %>
+          <% else %>
+            <%= image_tag 'avatar.png', class: 'avatar-large' %>
+          <% end %>
           <p><%= player.name %></p>
           <p class="text-transparent"><%= player.life_points %> <i class="fas fa-heart"></i></p>
         </div>
