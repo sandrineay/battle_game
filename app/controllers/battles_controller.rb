@@ -13,12 +13,16 @@ class BattlesController < ApplicationController #:nodoc:
     @battle = Battle.new
   end
 
-  def create
+  def create # rubocop:disable Metrics/MethodLength
     @battle = Battle.new(battle_params)
     if @battle.save
-      battle_winner_loser(@battle)
-      battle_scores(@battle)
-      redirect_to battle_path(@battle)
+      if score(@battle.player_1) == score(@battle.player_2)
+        @battle.update(draw: true)
+      else
+        battle_winner_loser(@battle)
+        battle_scores(@battle)
+        redirect_to battle_path(@battle)
+      end
     else
       render :new
     end

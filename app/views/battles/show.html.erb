@@ -1,39 +1,43 @@
 <div class="container">
-  <h1 class="m-b-40"><%= @winner.name %> prevailed! 🏆</h1>
+  <% if @battle.draw %>
+    <h1 class="m-b-40">It's a tie!</h1>
+    <p class="text-transparent">No one wins, the scores are equal.</p>
+  <% else %>
+    <h1 class="m-b-40"><%= @winner.name %> prevailed! 🏆</h1>
+    <div class="result-content">
+      <% if @winner.picture_url %>
+        <%= cl_image_tag @winner.picture, height: 100 %>
+      <% else %>
+        <%= image_tag 'avatar.png', class: 'avatar-large' %>
+      <% end %>
+      <p class="text-transparent fixed-width-p">After a long and grueling battle, <%= @winner.name %> won the fight.</p>
+    </div>
 
-  <div class="result-content">
-    <% if @winner.picture_url %>
-      <%= cl_image_tag @winner.picture, height: 100 %>
-    <% else %>
-      <%= image_tag 'avatar.png', class: 'avatar-large' %>
-    <% end %>
-    <p class="text-transparent fixed-width-p">After a long and grueling battle, <%= @winner.name %> won the fight.</p>
-  </div>
+    <h2 class="m-t-40">Battle recap:</h2>
 
-  <h2 class="m-t-40">Battle recap:</h2>
-
-  <table class="margin-dotted-table">
-    <tr>
-      <td></td>
-      <td><%= @winner.name %></td>
-      <td><%= @loser.name %></td>
-    </tr>
-    <tr>
-      <td>Score</td>
-      <td><%= @winner_score.round(1) %></td>
-      <td><%= @loser_score.round(1) %></td>
-    </tr>
-    <tr>
-      <td>Life points</td>
-      <td><%= @winner.life_points.round(1) %> <i class="fas fa-heart"></i></td>
-      <td><%= @loser.life_points.round(1) %> <i class="fas fa-heart"></i></td>
-    </tr>
-    <tr>
-      <td>Attack points</td>
-      <td><%= @winner.attack_points.round(1) %> <i class="fas fa-fist-raised"></i></td>
-      <td><%= @loser.attack_points.round(1) %> <i class="fas fa-fist-raised"></i></td>
-    </tr>
-  </table>
+    <table class="margin-dotted-table">
+      <tr>
+        <td></td>
+        <td><%= @winner.name %></td>
+        <td><%= @loser.name %></td>
+      </tr>
+      <tr>
+        <td>Score</td>
+        <td><%= @winner_score.round(1) %></td>
+        <td><%= @loser_score.round(1) %></td>
+      </tr>
+      <tr>
+        <td>Life points</td>
+        <td><%= @winner.life_points.round(1) %> <i class="fas fa-heart"></i></td>
+        <td><%= @loser.life_points.round(1) %> <i class="fas fa-heart"></i></td>
+      </tr>
+      <tr>
+        <td>Attack points</td>
+        <td><%= @winner.attack_points.round(1) %> <i class="fas fa-fist-raised"></i></td>
+        <td><%= @loser.attack_points.round(1) %> <i class="fas fa-fist-raised"></i></td>
+      </tr>
+    </table>
+  <% end %>
 
   <%= link_to "Launch new battle", new_battle_path, class: 'btn-submit-small' %>
 </div>
