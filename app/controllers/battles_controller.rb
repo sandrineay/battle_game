@@ -1,6 +1,8 @@
-class BattlesController < ApplicationController
+# frozen_string_literal: true
+
+class BattlesController < ApplicationController #:nodoc:
   before_action :set_battle, only: :show
-  before_action :set_players, only: [:new, :create]
+  before_action :set_players, only: %i[new create]
 
   def index
     @battles = Battle.all
@@ -21,32 +23,10 @@ class BattlesController < ApplicationController
   end
 
   def show
-    @player_1 = Player.find(@battle.player_1_id)
-    @player_2 = Player.find(@battle.player_2_id)
-    @score_1 = score(@player_1)
-    @score_2 = score(@player_2)
-    if @score_1 == @score_2
-      @winner = nil
-    else
-      if @score_1 > @score_2
-        @winner = @player_1
-        @player_2.life_points -= 0.5
-        @player_2.save
-        @player_1.life_points += 0.5
-        @player_1.attack_points += 0.8
-        @player_1.save
-      else
-        @winner = @player_2
-        @player_1.life_points -= 0.5
-        @player_1.save
-        @player_2.life_points += 0.5
-        @player_2.attack_points += 0.8
-        @player_2.save
-      end
-    end
+    # show method
   end
 
- private
+  private
 
   def score(player)
     attack = player.attack_points
