@@ -4,8 +4,10 @@
     <%= link_to "Launch a new battle", new_battle_path, class: 'btn-submit-small' %>
   </div>
   <% if @battles.empty? %>
-    No battles were fought yet.
-    <%= link_to "Launch your first battle!", new_battle_path, class: 'yellow-link' %>
+    <div class="m-t-40">
+      No battles were fought yet.
+      <%= link_to "Launch your first battle!", new_battle_path, class: 'yellow-link' %>
+    </div>
   <% else %>
     <table class="margin-dotted-table">
       <tr>
