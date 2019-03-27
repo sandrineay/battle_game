@@ -1,5 +1,6 @@
 AllCops:
   Exclude:
     - db/schema.rb
+    - test/system/battles_test.rb
 Documentation:
   Enabled: false

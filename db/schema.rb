@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(version: 2019_03_26_211254) do
   create_table "battles", force: :cascade do |t|
     t.integer "player_1_id"
     t.integer "player_2_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "winner_id"
     t.integer "loser_id"
     t.float "winner_score"
