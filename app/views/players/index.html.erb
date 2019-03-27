@@ -42,7 +42,7 @@
             <%= player.attack_points %> <i class="fas fa-fist-raised"></i>
           </td>
           <td>
-            <%= (player.victory_ratio * 100).round %> %
+            <%= player.primary_battles.any? || player.secondary_battles.any? ? (player.victory_ratio * 100).round : "0"  %> %
           </td>
           <td>
             <%= link_to edit_player_path(player), class: 'yellow-link' do %>

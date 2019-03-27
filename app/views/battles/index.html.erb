@@ -16,9 +16,13 @@
       </tr>
       <% @battles.each do |battle| %>
         <tr class="battle-item">
-          <td><%= battle.winner ? battle.winner.name : "Tie" %><%=" - #{battle.winner_score}" if battle.winner %></td>
+          <td>
+            <%= battle.winner ? battle.winner.name : "None or destroyed user" %><%=" - #{battle.winner_score}" if battle.winner %>
+          </td>
           <td>VS</td>
-          <td><%= battle.loser ? battle.loser.name : "Tie" %><%=" - #{battle.loser_score}" if battle.loser %></td>
+          <td>
+            <%= battle.loser ? battle.loser.name : "None or destroyed user" %><%=" - #{battle.loser_score}" if battle.loser %>
+          </td>
           <td><p class="text-transparent m-b-0"><em><%= battle.created_at.strftime('%a, %B %e %Y - %l:%M %p') %></em></p></td>
         </tr>
       <% end %>
