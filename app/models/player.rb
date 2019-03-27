@@ -16,9 +16,9 @@ class Player < ApplicationRecord
   validates :intelligence_points, inclusion: 1..13
   validates :magic_points, inclusion: 1..13
   validate :max_15_points
-  validates :image_url, allow_blank: true, format: {
+  validates :picture, allow_blank: true, format: {
     with: %r{\.gif|jpg|png}i, # rubocop:disable Style/RegexpLiteral
-    message: 'must be a url for gif, jpg, or png image.'
+    message: 'must be a gif, jpg, or png image.'
   }
 
   def max_15_points
