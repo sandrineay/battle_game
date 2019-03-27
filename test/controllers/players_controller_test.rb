@@ -10,7 +10,7 @@ class PlayersControllerTest < ActionDispatch::IntegrationTest
   test 'updating a player' do
     patch player_url(@player), params: { player: { name: 'updated' } }
 
-    assert_redirected_to players_path
+    assert_redirected_to new_battle_path
 
     @player.reload
     assert_equal 'updated', @player.name
