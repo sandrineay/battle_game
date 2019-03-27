@@ -31,11 +31,11 @@ ActiveRecord::Schema.define(version: 2019_03_27_155216) do
 
   create_table "players", force: :cascade do |t|
     t.string "name"
-    t.integer "life_points", default: 3, null: false
+    t.integer "life_points", default: 5, null: false
     t.float "attack_points", default: 1.0, null: false
-    t.integer "strength_points", default: 1, null: false
-    t.integer "intelligence_points", default: 1, null: false
-    t.integer "magic_points", default: 1, null: false
+    t.integer "strength_points", default: 6, null: false
+    t.integer "intelligence_points", default: 4, null: false
+    t.integer "magic_points", default: 5, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "picture"

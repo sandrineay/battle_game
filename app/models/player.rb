@@ -12,14 +12,14 @@ class Player < ApplicationRecord
   validates :strength_points, presence: true
   validates :intelligence_points, presence: true
   validates :magic_points, presence: true
-  validates :strength_points, inclusion: 1..8
-  validates :intelligence_points, inclusion: 1..8
-  validates :magic_points, inclusion: 1..8
-  validate :max_10_points
+  validates :strength_points, inclusion: 1..13
+  validates :intelligence_points, inclusion: 1..13
+  validates :magic_points, inclusion: 1..13
+  validate :max_15_points
 
-  def max_10_points
+  def max_15_points
     total_skills = strength_points + intelligence_points + magic_points
-    errors.add(:strength_points, 'Skill points > 10') if total_skills > 10
+    errors.add(:strength_points, 'Skill points > 15') if total_skills > 15
   end
 
   def score

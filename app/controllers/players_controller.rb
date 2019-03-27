@@ -41,8 +41,8 @@ class PlayersController < ApplicationController #:nodoc:
 
   def flash_alerts
     errors = @player.errors.full_messages
-    not_ok = 'Strength points Skill points > 10'
-    ok = 'The sum of magic, intelligence and strength points cannot exceed 10'
+    not_ok = 'Strength points Skill points > 15'
+    ok = 'The sum of magic, intelligence and strength points cannot exceed 15'
     errors.map { |m| m.gsub(not_ok, ok) }.join(' - ')
   end
 
