@@ -22,11 +22,16 @@
       <% @players.each do |player| %>
         <tr data-player-id="<%= player.id %>">
           <td>
-            <% if player.picture_url %>
-              <%= cl_image_tag player.picture, height: 100, width: 100, crop: :thumb, gravity: :face %>
-            <% else %>
-              <%= image_tag 'avatar.png', class: 'avatar-large' %>
-            <% end %>
+            <div class="player-picture">
+              <div class="dead-player <%= 'display-none' if player.life_points >   0 %>">
+                <i class="fas fa-dizzy"></i>
+              </div>
+              <% if player.picture_url %>
+                <%= cl_image_tag player.picture, height: 100, width: 100, crop: :thumb, gravity: :face %>
+              <% else %>
+                <%= image_tag 'avatar.png', class: 'avatar-large' %>
+              <% end %>
+            </div>
           </td>
           <td><strong><%= player.name %></strong></td>
           <td>
