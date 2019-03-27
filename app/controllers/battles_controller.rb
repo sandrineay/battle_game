@@ -1,6 +1,8 @@
-class BattlesController < ApplicationController
+# frozen_string_literal: true
+
+class BattlesController < ApplicationController #:nodoc:
   before_action :set_battle, only: :show
-  before_action :set_players, only: [:new, :create]
+  before_action :set_players, only: %i[new create]
 
   def index
     @battles = Battle.all
@@ -11,9 +13,16 @@ class BattlesController < ApplicationController
     @battle = Battle.new
   end
 
-  def create
+  def create # rubocop:disable Metrics/MethodLength
     @battle = Battle.new(battle_params)
     if @battle.save
+      battle_scores(@battle)
+      if @battle.winner_score == @battle.loser_score
+        @battle.draw = true
+        @battle.save
+      else
+        battle_winner_loser(@battle)
+      end
       redirect_to battle_path(@battle)
     else
       render :new
@@ -21,39 +30,49 @@ class BattlesController < ApplicationController
   end
 
   def show
-    @player_1 = Player.find(@battle.player_1_id)
-    @player_2 = Player.find(@battle.player_2_id)
-    @score_1 = score(@player_1)
-    @score_2 = score(@player_2)
-    if @score_1 == @score_2
-      @winner = nil
+    @winner = Player.find(@battle.winner) unless @battle.draw
+    @loser = Player.find(@battle.loser) unless @battle.draw
+    @winner_score = @battle.winner_score unless @battle.draw
+    @loser_score = @battle.loser_score unless @battle.draw
+  end
+
+  private
+
+  def winner_loser_scores(score1, score2)
+    if score1 > score2
+      { winner_score: score1, loser_score: score2 }
     else
-      if @score_1 > @score_2
-        @winner = @player_1
-        @player_2.life_points -= 0.5
-        @player_2.save
-        @player_1.life_points += 0.5
-        @player_1.attack_points += 0.8
-        @player_1.save
-      else
-        @winner = @player_2
-        @player_1.life_points -= 0.5
-        @player_1.save
-        @player_2.life_points += 0.5
-        @player_2.attack_points += 0.8
-        @player_2.save
-      end
+      { winner_score: score2, loser_score: score1 }
     end
   end
 
- private
+  def winner_loser(score1, score2)
+    if score1 > score2
+      { winner: @battle.player_1, loser: @battle.player_2 }
+    else
+      { winner: @battle.player_2, loser: @battle.player_1 }
+    end
+  end
 
-  def score(player)
-    attack = player.attack_points
-    strength = player.strength_points
-    intelligence = player.intelligence_points
-    magic = player.magic_points
-    attack + strength * 0.8 + intelligence * 0.7 + magic * 0.9
+  def battle_winner_loser(battle)
+    score1 = battle.player_1.score
+    score2 = battle.player_2.score
+    battle.winner = winner_loser(score1, score2)[:winner].id
+    battle.loser = winner_loser(score1, score2)[:loser].id
+    battle.save
+  end
+
+  def battle_scores(battle)
+    score1 = battle.player_1.score
+    score2 = battle.player_2.score
+    battle.winner_score = winner_loser_scores(score1, score2)[:winner_score]
+    battle.loser_score = winner_loser_scores(score1, score2)[:loser_score]
+    battle.save
+  end
+
+  def adjust_life_attack(battle)
+    winner = Player.find(battle.winner)
+    loser = Player.find(battle.loser)
   end
 
   def set_battle

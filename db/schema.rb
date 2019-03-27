@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_25_192019) do
+ActiveRecord::Schema.define(version: 2019_03_26_211254) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,6 +18,11 @@ ActiveRecord::Schema.define(version: 2019_03_25_192019) do
   create_table "battles", force: :cascade do |t|
     t.integer "player_1_id"
     t.integer "player_2_id"
+    t.integer "winner"
+    t.integer "loser"
+    t.float "winner_score"
+    t.float "loser_score"
+    t.boolean "draw", default: false
   end
 
   create_table "players", force: :cascade do |t|
