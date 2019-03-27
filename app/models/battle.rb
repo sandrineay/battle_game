@@ -8,6 +8,7 @@ class Battle < ApplicationRecord
 
   validates :player_1_id, presence: true
   validates :player_2_id, presence: true
+  validate :two_different_players
 
   def winner_loser(score1, score2)
     {
@@ -46,5 +47,10 @@ class Battle < ApplicationRecord
     battle.winner_score = battle.battle_winner_score
     battle.loser_score = battle.battle_loser_score
     battle.save
+  end
+
+  def two_different_players
+    message = 'The two players must be different!'
+    errors.add(:player_2_id, message) if player_2_id == player_1_id
   end
 end
