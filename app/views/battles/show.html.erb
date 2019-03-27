@@ -6,7 +6,7 @@
     <h1 class="m-b-40"><%= @winner.name %> prevailed! 🏆</h1>
     <div class="result-content">
       <% if @winner.picture_url %>
-        <%= cl_image_tag @winner.picture, height: 100 %>
+        <%= cl_image_tag @winner.picture, height: 100, width: 100, crop: :thumb, gravity: :face %>
       <% else %>
         <%= image_tag 'avatar.png', class: 'avatar-large' %>
       <% end %>
