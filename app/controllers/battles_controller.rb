@@ -72,7 +72,6 @@ class BattlesController < ApplicationController #:nodoc:
   end
 
   def adjust_life_attack(battle)
-    battle.winner.life_points += 1
     battle.winner.attack_points += 0.3
     battle.loser.life_points -= 1
     battle.winner.save
