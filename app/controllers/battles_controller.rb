@@ -16,7 +16,7 @@ class BattlesController < ApplicationController #:nodoc:
   def create # rubocop:disable Metrics/MethodLength
     @battle = Battle.new(battle_params)
     if @battle.save
-      update_battle_scores(battle)
+      update_battle_scores(@battle)
       if @battle.score1 == @battle.score2
         @battle.draw = true
         @battle.save
