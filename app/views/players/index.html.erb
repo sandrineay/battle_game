@@ -7,7 +7,7 @@
     There are no players.
     <%= link_to "Create a player!", new_player_path %>
   <% else %>
-    <table class="margin-dotted-table">
+    <table class="margin-dotted-table text-center">
       <tr>
         <td></td>
         <td></td>
@@ -29,9 +29,11 @@
           </td>
           <td><strong><%= player.name %></strong></td>
           <td>
-            <p>💡 <%= player.intelligence_points %></p>
-            <p>💫 <%= player.magic_points %></p>
-            <p>💪 <%= player.strength_points %></p>
+            <div class="m-s-40">
+              <span class="m-r-15">💡 <%= player.intelligence_points %></span>
+              <span class="m-r-15">💫 <%= player.magic_points %></span>
+              <span class="m-r-15">💪 <%= player.strength_points %></span>
+            </div>
           </td>
           <td>
             <%= player.life_points %> <i class="fas fa-heart"></i>
@@ -40,7 +42,7 @@
             <%= player.attack_points %> <i class="fas fa-fist-raised"></i>
           </td>
           <td>
-
+            <%= (player.victory_ratio * 100).round %> %
           </td>
           <td>
             <%= link_to edit_player_path(player), class: 'yellow-link' do %>

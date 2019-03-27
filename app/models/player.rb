@@ -3,8 +3,8 @@
 class Player < ApplicationRecord
   has_many :primary_battles, class_name: 'Battle', foreign_key: 'player_1_id'
   has_many :secondary_battles, class_name: 'Battle', foreign_key: 'player_2_id'
-  has_many :first_battles, class_name: 'Battle', foreign_key: 'winner_id'
-  has_many :second_battles, class_name: 'Battle', foreign_key: 'loser_id'
+  has_many :won_battles, class_name: 'Battle', foreign_key: 'winner_id'
+  has_many :lost_battles, class_name: 'Battle', foreign_key: 'loser_id'
 
   mount_uploader :picture, PhotoUploader
   validates :name, uniqueness: true, presence: true
@@ -24,5 +24,9 @@ class Player < ApplicationRecord
   def score
     skills = [strength_points, intelligence_points, magic_points].shuffle!
     attack_points + skills[0] * 0.5 + skills[1] * 0.7 + skills[2] * 0.9
+  end
+
+  def victory_ratio
+    won_battles.count.to_f / (primary_battles + secondary_battles).count.to_f
   end
 end
