@@ -15,6 +15,10 @@ class Player < ApplicationRecord
   validates :intelligence_points, inclusion: 0..10
   validates :magic_points, inclusion: 0..10
   validate :max_10_points
+  validates :image_url, allow_blank: true, format: {
+    with: %r{\.gif|jpg|png}i, # rubocop:disable Style/RegexpLiteral
+    message: 'must be a url for gif, jpg, or png image.'
+  }
 
   def max_10_points
     total_skills = strength_points + intelligence_points + magic_points
