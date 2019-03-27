@@ -29,4 +29,12 @@ class Player < ApplicationRecord
   def victory_ratio
     won_battles.count.to_f / (primary_battles + secondary_battles).count.to_f
   end
+
+  # def add_attack_points
+  #   attack_points + 0.3
+  # end
+
+  # def remove_life_points
+  #   life_points - 1
+  # end
 end

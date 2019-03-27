@@ -16,12 +16,12 @@ class BattlesController < ApplicationController #:nodoc:
   def create # rubocop:disable Metrics/MethodLength
     @battle = Battle.new(battle_params)
     if @battle.save
-      battle_scores(@battle)
-      if @battle.winner_score == @battle.loser_score
+      update_battle_scores(battle)
+      if @battle.score1 == @battle.score2
         @battle.draw = true
         @battle.save
       else
-        battle_winner_loser(@battle)
+        update_battle_winner_loser(@battle)
         adjust_life_attack(@battle)
       end
       redirect_to battle_path(@battle)
@@ -39,28 +39,17 @@ class BattlesController < ApplicationController #:nodoc:
 
   private
 
-  def winner_loser(score1, score2)
-    {
-      winner_score: score1 > score2 ? score1 : score2,
-      loser_score: score1 > score2 ? score2 : score1,
-      winner: score1 > score2 ? @battle.player_1 : @battle.player_2,
-      loser: score1 > score2 ? @battle.player_2 : @battle.player_1
-    }
-  end
-
-  def battle_winner_loser(battle)
-    score1 = battle.player_1.score
-    score2 = battle.player_2.score
-    battle.winner_id = winner_loser(score1, score2)[:winner].id
-    battle.loser_id = winner_loser(score1, score2)[:loser].id
+  def update_battle_scores(battle)
+    battle.score1 = battle.player_1.score
+    battle.score2 = battle.player_2.score
     battle.save
   end
 
-  def battle_scores(battle)
-    score1 = battle.player_1.score
-    score2 = battle.player_2.score
-    battle.winner_score = winner_loser(score1, score2)[:winner_score]
-    battle.loser_score = winner_loser(score1, score2)[:loser_score]
+  def update_battle_winner_loser(battle)
+    battle.winner = battle.battle_winner
+    battle.loser = battle.battle_loser
+    battle.winner_score = battle.battle_winner_score
+    battle.loser_score = battle.battle_loser_score
     battle.save
   end
 
