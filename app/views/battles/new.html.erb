@@ -8,7 +8,8 @@
   <% else %>
     <h1>Choose two players 🤝</h1>
     <p class="subtitle m-b-0">Click on the avatar of two players - you can also <%= link_to "create a new player", new_player_path %>.</p>
-    <p class="subtitle">Be careful, if a player loses a battle, he loses a life <i class="fas fa-heart"></i>. If he wins, he gains attack points <i class="fas fa-fist-raised"></i>!</p>
+    <p class="subtitle m-b-0">- Be careful, if a player loses a battle, he loses a life <i class="fas fa-heart"></i>. If he wins, he gains attack points <i class="fas fa-fist-raised"></i>!</p>
+    <p class="subtitle">- When a player has lost all his lives, he cannot fight anymore! He's dead <i class="fas fa-dizzy"></i></p>
     <div class="player-list">
       <% @players.each do |player| %>
         <div class="player-item text-center" data-player-id=<%= "#{player.id}" %>>
