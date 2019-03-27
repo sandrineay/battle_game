@@ -13,7 +13,7 @@ player = Player.new(
   intelligence_points: 4,
   magic_points: 4
 )
-player.remote_picture_url = 'https://raw.githubusercontent.com/sandrineay/pdv-images/master/gandalf.png'
+player.remote_picture_url = 'https://raw.githubusercontent.com/sandrineay/pdv-images/master/gandalf-pic.png'
 player.save
 
 player = Player.create(
