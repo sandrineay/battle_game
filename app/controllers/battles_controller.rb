@@ -13,7 +13,7 @@ class BattlesController < ApplicationController #:nodoc:
     @battle = Battle.new
   end
 
-  def create # rubocop:disable Metrics/MethodLength
+  def create # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
     @battle = Battle.new(battle_params)
     if @battle.save
       Battle.update_battle_scores(@battle)
@@ -26,6 +26,7 @@ class BattlesController < ApplicationController #:nodoc:
       end
       redirect_to battle_path(@battle)
     else
+      flash.now[:alert] = flash_alerts
       render :new
     end
   end
@@ -38,6 +39,11 @@ class BattlesController < ApplicationController #:nodoc:
   end
 
   private
+
+  def flash_alerts
+    errors = @battle.errors.full_messages
+    'Please select two players :)' if errors.include? "Player 2 can't be blank"
+  end
 
   def set_battle
     @battle = Battle.find(params[:id])
