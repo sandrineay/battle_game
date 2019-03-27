@@ -39,20 +39,13 @@ class BattlesController < ApplicationController #:nodoc:
 
   private
 
-  def winner_loser_scores(score1, score2)
-    if score1 > score2
-      { winner_score: score1, loser_score: score2 }
-    else
-      { winner_score: score2, loser_score: score1 }
-    end
-  end
-
   def winner_loser(score1, score2)
-    if score1 > score2
-      { winner: @battle.player_1, loser: @battle.player_2 }
-    else
-      { winner: @battle.player_2, loser: @battle.player_1 }
-    end
+    {
+      winner_score: score1 > score2 ? score1 : score2,
+      loser_score: score1 > score2 ? score2 : score1,
+      winner: score1 > score2 ? @battle.player_1 : @battle.player_2,
+      loser: score1 > score2 ? @battle.player_2 : @battle.player_1
+    }
   end
 
   def battle_winner_loser(battle)
@@ -66,8 +59,8 @@ class BattlesController < ApplicationController #:nodoc:
   def battle_scores(battle)
     score1 = battle.player_1.score
     score2 = battle.player_2.score
-    battle.winner_score = winner_loser_scores(score1, score2)[:winner_score]
-    battle.loser_score = winner_loser_scores(score1, score2)[:loser_score]
+    battle.winner_score = winner_loser(score1, score2)[:winner_score]
+    battle.loser_score = winner_loser(score1, score2)[:loser_score]
     battle.save
   end
 
