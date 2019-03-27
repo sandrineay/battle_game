@@ -57,8 +57,8 @@ class BattlesController < ApplicationController #:nodoc:
   def battle_winner_loser(battle)
     score1 = battle.player_1.score
     score2 = battle.player_2.score
-    battle.winner = winner_loser(score1, score2)[:winner].id
-    battle.loser = winner_loser(score1, score2)[:loser].id
+    battle.winner_id = winner_loser(score1, score2)[:winner].id
+    battle.loser_id = winner_loser(score1, score2)[:loser].id
     battle.save
   end
 
