@@ -9,10 +9,10 @@
 - Continuous integration with [Travis CI](https://travis-ci.org).
 
 - To launch app locally:
-* Create .env file at the root of the project
-* Run `echo '.env*' >> .gitignore` so the file is not pushed to Github
-* Add your Cloudinary API Key, which will look like: `CLOUDINARY_URL=cloudinary://298522699261255:Qa1ZfO4syfbOC-***********************8`
-* Run `rails db:migrate db:seed`
-* Run `rails s`
+1. Create .env file at the root of the project
+2. Run `echo '.env*' >> .gitignore` so the file is not pushed to Github
+3. Add your Cloudinary API Key, which will look like: `CLOUDINARY_URL=cloudinary://298522699261255:Qa1ZfO4syfbOC-***********************8`
+4. Run `rails db:migrate db:seed`
+5. Run `rails s`
 
 
