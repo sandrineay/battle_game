@@ -5,7 +5,6 @@ class PlayersController < ApplicationController #:nodoc:
 
   def index
     @players = Player.all
-    @players_count = Player.count
   end
 
   def new

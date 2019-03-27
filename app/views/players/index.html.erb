@@ -4,7 +4,7 @@
     <%= link_to "Create a new player", new_player_path, class: 'btn-submit-small' %>
   </div>
   <% if @players.empty? %>
-    You have no players.
+    There are no players.
     <%= link_to "Create a player!", new_player_path %>
   <% else %>
     <table class="margin-dotted-table">
