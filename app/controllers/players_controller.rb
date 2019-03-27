@@ -16,6 +16,7 @@ class PlayersController < ApplicationController #:nodoc:
     if @player.save
       redirect_to new_battle_path
     else
+      flash.now[:alert] = flash_alerts
       render :new
     end
   end
@@ -37,6 +38,13 @@ class PlayersController < ApplicationController #:nodoc:
   end
 
   private
+
+  def flash_alerts
+    errors = @player.errors.full_messages
+    not_ok = 'Strength points Skill points > 10'
+    ok = 'The sum of magic, intelligence and strength points cannot exceed 10'
+    errors.map { |m| m.gsub(not_ok, ok) }.join(' - ')
+  end
 
   def set_player
     @player = Player.find(params[:id])

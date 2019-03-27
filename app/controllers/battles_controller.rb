@@ -42,11 +42,9 @@ class BattlesController < ApplicationController #:nodoc:
 
   def flash_alerts
     errors = @battle.errors.full_messages
-    if errors.include? "Player 2 can't be blank"
-      'Please select two players :)'
-    else
-      @battle.errors.full_messages.join(', ')
-    end
+    not_ok = "Player 2 can't be blank"
+    ok = 'Please select two players'
+    errors.map { |m| m.gsub(not_ok, ok) }.join(' - ')
   end
 
   def set_battle

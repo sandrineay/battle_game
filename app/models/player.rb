@@ -8,12 +8,13 @@ class Player < ApplicationRecord
 
   mount_uploader :picture, PhotoUploader
   validates :name, uniqueness: true, presence: true
+  validates :name, length: { minimum: 3, maximum: 13 }
   validates :strength_points, presence: true
   validates :intelligence_points, presence: true
   validates :magic_points, presence: true
-  validates :strength_points, inclusion: 0..10
-  validates :intelligence_points, inclusion: 0..10
-  validates :magic_points, inclusion: 0..10
+  validates :strength_points, inclusion: 1..8
+  validates :intelligence_points, inclusion: 1..8
+  validates :magic_points, inclusion: 1..8
   validate :max_10_points
 
   def max_10_points
