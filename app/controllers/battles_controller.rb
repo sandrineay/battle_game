@@ -22,6 +22,7 @@ class BattlesController < ApplicationController #:nodoc:
         @battle.save
       else
         battle_winner_loser(@battle)
+        adjust_life_attack(@battle)
       end
       redirect_to battle_path(@battle)
     else
@@ -73,6 +74,11 @@ class BattlesController < ApplicationController #:nodoc:
   def adjust_life_attack(battle)
     winner = Player.find(battle.winner)
     loser = Player.find(battle.loser)
+    winner.life_points += 1
+    winner.attack_points += 0.3
+    loser.life_points -= 1
+    winner.save
+    loser.save
   end
 
   def set_battle
@@ -80,7 +86,7 @@ class BattlesController < ApplicationController #:nodoc:
   end
 
   def set_players
-    @players = Player.where('life_points > ?', 0.0)
+    @players = Player.where('life_points > ?', 0.0).order(life_points: :desc)
   end
 
   def battle_params

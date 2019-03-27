@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2019_03_26_211254) do
 
   create_table "players", force: :cascade do |t|
     t.string "name"
-    t.float "life_points", default: 3.0, null: false
+    t.integer "life_points", default: 3, null: false
     t.float "attack_points", default: 1.0, null: false
     t.integer "strength_points", default: 1, null: false
     t.integer "intelligence_points", default: 1, null: false

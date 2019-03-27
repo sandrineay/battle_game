@@ -18,8 +18,8 @@
     <table class="margin-dotted-table">
       <tr>
         <td></td>
-        <td><%= @winner.name %></td>
-        <td><%= @loser.name %></td>
+        <td><%= @winner.name %> 👍</td>
+        <td><%= @loser.name %> 👎</td>
       </tr>
       <tr>
         <td>Score</td>
@@ -28,8 +28,8 @@
       </tr>
       <tr>
         <td>Life points</td>
-        <td><%= @winner.life_points.round(1) %> <i class="fas fa-heart"></i></td>
-        <td><%= @loser.life_points.round(1) %> <i class="fas fa-heart"></i></td>
+        <td><%= @winner.life_points %> <i class="fas fa-heart"></i></td>
+        <td><%= @loser.life_points %> <i class="fas fa-heart"></i></td>
       </tr>
       <tr>
         <td>Attack points</td>
