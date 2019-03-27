@@ -4,7 +4,7 @@ class PlayersController < ApplicationController #:nodoc:
   before_action :set_player, only: %i[edit update destroy]
 
   def index
-    @players = Player.all
+    @players = Player.order(life_points: :desc)
   end
 
   def new
