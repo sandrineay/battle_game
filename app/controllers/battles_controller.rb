@@ -16,13 +16,13 @@ class BattlesController < ApplicationController #:nodoc:
   def create # rubocop:disable Metrics/MethodLength
     @battle = Battle.new(battle_params)
     if @battle.save
-      update_battle_scores(@battle)
+      Battle.update_battle_scores(@battle)
       if @battle.score1 == @battle.score2
         @battle.draw = true
         @battle.save
       else
-        update_battle_winner_loser(@battle)
-        adjust_life_attack(@battle)
+        Battle.update_battle_winner_loser(@battle)
+        Player.adjust_life_attack(@battle)
       end
       redirect_to battle_path(@battle)
     else
@@ -38,27 +38,6 @@ class BattlesController < ApplicationController #:nodoc:
   end
 
   private
-
-  def update_battle_scores(battle)
-    battle.score1 = battle.player_1.score
-    battle.score2 = battle.player_2.score
-    battle.save
-  end
-
-  def update_battle_winner_loser(battle)
-    battle.winner = battle.battle_winner
-    battle.loser = battle.battle_loser
-    battle.winner_score = battle.battle_winner_score
-    battle.loser_score = battle.battle_loser_score
-    battle.save
-  end
-
-  def adjust_life_attack(battle)
-    battle.winner.attack_points += 0.3
-    battle.loser.life_points -= 1
-    battle.winner.save
-    battle.loser.save
-  end
 
   def set_battle
     @battle = Battle.find(params[:id])
