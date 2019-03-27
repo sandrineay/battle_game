@@ -31,8 +31,8 @@ class BattlesController < ApplicationController #:nodoc:
   end
 
   def show
-    @winner = Player.find(@battle.winner) unless @battle.draw
-    @loser = Player.find(@battle.loser) unless @battle.draw
+    @winner = @battle.winner unless @battle.draw
+    @loser = @battle.loser unless @battle.draw
     @winner_score = @battle.winner_score unless @battle.draw
     @loser_score = @battle.loser_score unless @battle.draw
   end
@@ -58,8 +58,8 @@ class BattlesController < ApplicationController #:nodoc:
   def battle_winner_loser(battle)
     score1 = battle.player_1.score
     score2 = battle.player_2.score
-    battle.winner = winner_loser(score1, score2)[:winner].id
-    battle.loser = winner_loser(score1, score2)[:loser].id
+    battle.winner_id = winner_loser(score1, score2)[:winner].id
+    battle.loser_id = winner_loser(score1, score2)[:loser].id
     battle.save
   end
 
@@ -72,13 +72,11 @@ class BattlesController < ApplicationController #:nodoc:
   end
 
   def adjust_life_attack(battle)
-    winner = Player.find(battle.winner)
-    loser = Player.find(battle.loser)
-    winner.life_points += 1
-    winner.attack_points += 0.3
-    loser.life_points -= 1
-    winner.save
-    loser.save
+    battle.winner.life_points += 1
+    battle.winner.attack_points += 0.3
+    battle.loser.life_points -= 1
+    battle.winner.save
+    battle.loser.save
   end
 
   def set_battle
