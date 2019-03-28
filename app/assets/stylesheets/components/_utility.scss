@@ -3,13 +3,31 @@ body {
   color: white;
 }
 
+// Text
+
 h2 {
   font-size: 24px;
 }
 
+p.text-transparent {
+  opacity: 0.4;
+}
+
+// Width
+
 p.fixed-width-p {
   width: 300px;
 }
+
+.width-100 {
+  max-width: 100px;
+}
+
+.width-500 {
+  max-width: 500px;
+}
+
+// Margin
 
 .m-b-40 {
   margin-bottom: 40px;
@@ -31,6 +49,8 @@ p.fixed-width-p {
   margin-right: 15px;
 }
 
+// Table
+
 .margin-dotted-table {
   margin: 40px 0;
   border: dotted 1px rgb(255,255,255);
@@ -43,12 +63,4 @@ p.fixed-width-p {
   tr {
     border: dotted 1px rgb(255,255,255);
   }
-}
-
-.selected img {
-  opacity: 0.2;
-}
-
-.width-100 {
-  max-width: 100px;
 }

@@ -6,16 +6,6 @@
   opacity: 0.2;
 }
 
-.step-content {
-  h1 {
-    font-size: 40px;
-  }
-  p.subtitle {
-    font-size: 16px;
-    opacity: 0.4;
-  }
-}
-
 .player-list {
   margin: 80px 0;
   display: flex;
@@ -27,14 +17,13 @@
   p {
     margin-bottom: 0;
   }
+  img {
+    border-radius: 50%;
+    margin-bottom: 20px;
+  }
 }
 
-.player-item img {
-  border-radius: 50%;
-  margin-bottom: 20px;
-}
-
-p.text-transparent {
-  opacity: 0.4;
+.selected img {
+  opacity: 0.2;
 }
 
